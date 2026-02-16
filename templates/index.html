@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Daily Messaging Balance Sheet</title>
+    <style>
+      body{font-family:system-ui,Segoe UI,Arial;margin:24px}
+      label{display:block;margin-top:8px}
+      table{border-collapse:collapse;width:100%;margin-top:12px}
+      th,td{border:1px solid #ddd;padding:8px}
+      th{background:#f3f3f3}
+      .row{display:flex;gap:8px}
+      .row > *{flex:1}
+    </style>
+  </head>
+  <body>
+    <h1>Daily Messaging Balance Sheet</h1>
+
+    <form id="entryForm">
+      <div class="row">
+        <input type="date" id="date" />
+        <input type="text" id="description" placeholder="Description" />
+        <input type="number" step="0.01" id="amount" placeholder="Amount" />
+        <button type="submit">Add</button>
+      </div>
+    </form>
+
+    <div style="margin-top:12px">
+      <label>Filter date</label>
+      <input type="date" id="filterDate" />
+      <label style="margin-left:8px">Range</label>
+      <input type="date" id="startDate" />
+      <input type="date" id="endDate" />
+      <button id="loadBtn">Load</button>
+      <label style="margin-left:8px">Per page</label>
+      <input type="number" id="perPage" value="50" style="width:80px" />
+      <button id="loadMore">Load more</button>
+      <strong style="margin-left:12px">Balance: <span id="balance">0.00</span></strong>
+      <button id="exportBtn" style="margin-left:12px">Export CSV (login required)</button>
+    </div>
+
+    <div style="margin-top:12px">
+      <label>Monthly summary</label>
+      <input type="month" id="monthPicker" />
+      <select id="monthFormat">
+        <option value="json">JSON (inline)</option>
+        <option value="csv">CSV (download)</option>
+        <option value="pdf">PDF (download)</option>
+      </select>
+      <button id="monthBtn">Show</button>
+      <div id="monthlySummary" style="margin-top:8px"></div>
+    </div>
+
+    <div style="margin-top:12px">
+      <label>Auth</label>
+      <div class="row">
+        <input type="text" id="username" placeholder="username" />
+        <input type="password" id="password" placeholder="password" />
+        <button id="loginBtn">Login</button>
+        <button id="logoutBtn">Logout</button>
+      </div>
+      <div id="userInfo" style="margin-top:6px"></div>
+    </div>
+    <div style="margin-top:12px">
+      <label>Register / Password reset</label>
+      <div class="row">
+        <input type="text" id="regUser" placeholder="new username" />
+        <input type="password" id="regPass" placeholder="new password" />
+        <input type="email" id="regEmail" placeholder="email (optional)" />
+        <button id="regBtn">Register</button>
+      </div>
+      <div style="margin-top:8px" class="row">
+        <input type="text" id="resetUser" placeholder="username for reset" />
+        <button id="resetReqBtn">Request Reset</button>
+        <input type="text" id="resetToken" placeholder="token" />
+        <input type="password" id="resetNew" placeholder="new password" />
+        <button id="resetBtn">Reset</button>
+      </div>
+    </div>
+
+    <table id="msgs">
+      <thead><tr><th>ID</th><th>Date</th><th>Description</th><th>Amount</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
